@@ -26,7 +26,7 @@ int hit_enemy(int str, int dex, int wep, int enemy_ac)
 	{
 		roll = (rand()%10) + (rand()%10);
 	}
-	roll = roll + (str - 10) - enemy_ac;
+	roll = (roll + (str - 10)) - enemy_ac;
 	return roll; 
 
 }

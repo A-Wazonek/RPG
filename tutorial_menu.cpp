@@ -24,5 +24,6 @@ void tutorial_menu(void)
 	cout << "Each weapon has its own roll, and STR is added to that roll, unless you're using a Rapier then DEX is added." << endl;
 	cout << "Roll higher than your opponents AC and you'll deal damage!" << endl;
 	cout << endl << endl;
+	cout << "At the first level you start with a dagger, but as you level you get stronger and stronger weapons" << endl;
 
 }

@@ -28,8 +28,8 @@ switch(choice)
 	case 3:
 		return 3;
 	default:
-		cout << "Using Dagger";
-		return 1;
+		cout << "Using Dagger"<< endl;
+		return weapon;
 }
 }
 else if(level < 10)
@@ -47,7 +47,7 @@ switch(choice)
 	case 4:
 		return 4;
 	default:
-		cout << "Using Dagger";
+		cout << "Using Dagger" << endl;
 		return 1;
 }
 }

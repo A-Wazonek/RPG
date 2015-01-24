@@ -68,7 +68,7 @@ void tutorial_menu();
 main(){
 	int race_choice;
 	cout << "Created By: Alex Wazonek" << endl; 
-	cout << endl << endl << endl; 
+	cout << endl << "Arena Fighter" << endl; 
 	cout << "1. Start Game" << endl;
 	cout << "2. Help" << endl;
 	int help_choice;
@@ -124,18 +124,40 @@ main(){
 	cout << "HP: " << player.get_hp() << endl;
 	cout << "AC: " << player.get_ac() << endl;
 	
+	//Fight 1
 	character rat(3);
 	rat.inc_str(-2);
 	rat.inc_phys(-4);
 	rat.inc_dex(-1);
 	rat.reset_hp();
 	rat.reset_ac();
-	
+	cout << "A rat appears before you, it appears feral" << endl;
+	cout << "Press y to start combat" << endl;
+	char start;
+	cin >> start;
 	int result = fight(&player, &rat);
-	if(result == 1)
+		if(result == 1)
 	{
-	cout << "Congrats, you've finished this game!" << endl;
+	cout << "You kill the rat!" << endl;
 	}
+	else 
+	{
+	cout << "You died to a rat!" << endl;
+	return 1;
+	}
+	
+	//Fight 2
+	character dog(3);
+	cout << "A feral dog is tossed into the arena, prepare to fight!" << endl;
+	cin >> start;
+	int result2 = fight(&player, &dog);
+	if(result)
+	{
+	cout << "You killed the dog" << endl;
+	}
+	else return 1;
+	cout << "Level up!" << endl;
+	
 	
 }
 
@@ -169,12 +191,14 @@ int fight(character *player, character *enemy)
 	
 	while(won == 0)
 	{
-		cout << "Hit enemy with which weapon?";
-		int weapon = get_weapon(player->get_level());
-		
-		
+		cout << "Hit enemy with which weapon? ";
+		//int weapon = get_weapon(player->get_level());
+		cout << "1. Dagger" << endl;
+		int weapon;
+		scanf("%d",&weapon);
+		weapon = 1;
 		int damage1 = hit_enemy(player->get_str(),player->get_dex(),weapon,enemy->get_ac());
-		if(damage1 < 0){cout << "You hit the enemy for " << damage1 << "damage " << endl;enemy->take_damage(damage1);}
+		if(damage1 > 0){cout << "You hit the enemy for " << damage1 << " damage " << endl;enemy->take_damage(damage1);}
 		else cout << "missed enemy" << endl;
 		
 		
@@ -188,5 +212,4 @@ int fight(character *player, character *enemy)
 	if(enemy->get_hp() < 0){cout << "You won! " << endl; won = 1; return 1;}
 	}
 }
-
 
