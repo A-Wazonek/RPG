@@ -170,7 +170,7 @@ main(){
 	rat.inc_dex(-1);
 	rat.reset_hp();
 	rat.reset_ac();
-	cout << "A rat appears before you, it appears feral" << endl;
+	cout << "A rat appears before you, it looks feral" << endl;
 	cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 	int result = fight(&player, &rat);
 	if(!result){return 1;};
@@ -222,7 +222,7 @@ main(){
 	fight5.inc_phys(5);
 	fight5.inc_dex(3);
 	fight5.set_wep(2);
-	cout << " A trained gladiator stands before you" << endl;
+	cout << "A trained gladiator stands before you, armed with a shortsword and a shield" << endl;
 	cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 	int result5 = fight(&player,&fight5);
 	if(!result5){return 1;}
@@ -235,7 +235,7 @@ main(){
 	fight6.inc_phys(8);
 	fight6.inc_dex(2);
 	fight6.set_wep(2);
-	cout << "A large dwarf warrior stands before you" << endl;
+	cout << "A large dwarf warrior stands before you, he's holding a hammer" << endl;
 	cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 	int result6 = fight(&player,&fight6);
 	if(!result6){return 1;}
@@ -249,9 +249,9 @@ main(){
 	character fight7(3);
 	fight7.inc_str(2);
 	fight7.inc_phys(3);
-	fight7.inc_dex(8);
+	fight7.inc_dex(6);
 	fight7.set_wep(3);
-	cout << " An elf armed with a Rapier enters the arena" << endl;
+	cout << "An elf armed with a Rapier enters the arena" << endl;
 	cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 	int result7 = fight(&player,&fight7);
 	if(!result7){return 1;}
@@ -267,12 +267,13 @@ main(){
 	boss1.inc_phys(6);
 	boss1.inc_dex(6);
 	boss1.set_wep(4);
-	cout << " A large man in armour enters the arena! This fight seems like it will be tough!" << endl;
+	cout << "A large man in armour enters the arena! This fight seems like it will be tough!" << endl;
 	cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 	int result8 = fight(&player,&boss1);
 	if(!result8){return 1;}
 	cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 	cout << "You've beaten the boss! Thanks for playing!" << endl;
+	cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 	
 }
 
