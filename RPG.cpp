@@ -2,6 +2,7 @@
 #include <cstring>
 #include <cstdlib>
 #include <iomanip>
+#include <limits>
 #include<cstdio>
 using namespace std;
 
@@ -27,7 +28,7 @@ public:
 	int get_wep(){return weapon;};
 	void set_wep(int wep){weapon = wep;};
 	void inc_str(int newstr){str=str + newstr;};
-	void inc_phys(int newphys){phys=phys + newphys;};
+	void inc_phys(int newphys){phys=phys + newphys;reset_hp();};
 	void inc_dex(int newdex){dex= dex +newdex;};
 	void reset_hp(){hp = phys + level;};
 	void reset_ac(){ac=6 + (phys-10) + (dex-10);};
@@ -41,13 +42,13 @@ character::character(int rc){
 	race = rc;
 	if(rc == 1) 
 	{
-		str = 12;
+		str = 11;
 		phys = 12;
 		dex = 8;
 	}
 	else if(rc == 2)
 	{
-		str = 12;
+		str = 11;
 		phys = 8;
 		dex = 12;
 	}
@@ -62,6 +63,7 @@ character::character(int rc){
 	ac = (6 + (phys-10) + (dex - 10));
 	weapon = 1;
 }
+
 int fight(character *player, character *enemy);
 int hit_enemy(int str, int dex, int wep, int enemy_ac);
 int get_weapon(int level);
@@ -87,11 +89,12 @@ switch(new_choice)
 		break;
 }
 cout << endl;
-if(level ==10){cout << "You've unlocked the Great Axe!" << endl;}
-else if( level >= 6){cout << "You've unlocked the Longsword!" << endl;}
-else if(level == 3){cout << "You've unlocked the Short Sword and the Rapier!" << endl;}
+if(level ==6){cout << "You've unlocked the Great Axe!" << endl;}
+else if( level == 4){cout << "You've unlocked the Longsword!" << endl;}
+else if(level == 2){cout << "You've unlocked the Short Sword and the Rapier!" << endl;}
 
 }
+
 
 void character::print_stats(){
 		cout << "Stats: " << endl;
@@ -107,7 +110,7 @@ main(){
 	cout << "Created By: Alex Wazonek" << endl; 
 	cout << endl << "Arena Fighter" << endl; 
 	cout << "1. Start Game" << endl;
-	cout << "2. Help" << endl;
+	cout << "2. Help" << endl << endl;
 	int help_choice;
 	scanf("%d",&help_choice);
 	if(help_choice == 2)
@@ -126,6 +129,7 @@ main(){
 		cout << "You have " << bonus_stats << " points to spend on stats" << endl;
 		player.print_stats();
 		cout << "Increase: 1.STR 2.PHYS 3.DEX " << endl;
+		cin.clear();
 		scanf("%d",&stat_choice);
 		switch(stat_choice)
 		{
@@ -150,11 +154,15 @@ main(){
 	player.reset_hp();
 	player.reset_ac();
 	
-	cout << endl << endl << endl << endl<<endl<<endl<<endl<<endl << endl << endl << endl << endl << endl << endl;
+	cout << endl << endl << endl << endl<<endl<<endl<<endl<<endl << endl << endl << endl << endl << endl << endl<< endl << endl;
 	player.print_stats();
 	cout << "HP: " << player.get_hp() << endl;
 	cout << "AC: " << player.get_ac() << endl;
 	
+	char test;
+
+	cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+
 	//Fight 1
 	character rat(3);
 	rat.inc_str(-2);
@@ -163,61 +171,108 @@ main(){
 	rat.reset_hp();
 	rat.reset_ac();
 	cout << "A rat appears before you, it appears feral" << endl;
-	cout << "Press y to start combat" << endl;
-	char start;
-	cin >> start;
+	cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 	int result = fight(&player, &rat);
-		if(result == 1)
-	{
-	cout << "You kill the rat!" << endl;
-	}
-	else 
-	{
-	cout << "You died to a rat!" << endl;
-	return 1;
-	}
+	if(!result){return 1;};
 	player.reset_hp();
+	cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 	
 	//Fight 2
 	character dog(3);
+	dog.inc_phys(-1);
 	cout << "A feral dog is tossed into the arena, prepare to fight!" << endl;
-	cin >> start;
+	cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 	int result2 = fight(&player, &dog);
-	if(result)
-	{
-	cout << "You killed the dog" << endl;
-	}
-	else return 1;
+	if(!result2){return 1;};
 	player.level_up();
 	player.reset_hp();
+	cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 	
 	//Fight 3
 	character human(3);
 	human.inc_str(2);
 	cout << "An inexperienced Gladiator appears before you, he's armed with a dagger" << endl;
-	cin >> start;
+	cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 	int result3 = fight(&player, &human);
-	if(result3)
-	{
-		cout << "You killed the fighter" << endl;
-	}
-	else return 1;
+	if(!result3){return 1;};
 	player.level_up();
-	player.reset_hp();
+	player.reset_hp();	
+	cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+	
 	//Fight 4
 	character large_human(3);
 	large_human.inc_str(2);
 	large_human.inc_phys(2);
-	large_human.inc_dex(2);
+	large_human.inc_dex(1);
 	large_human.set_wep(2);
 	cout << "A somewhat trained gladiator appears before you, he's armed with a short sword!" << endl;
+	cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 	int result4 = fight(&player, &large_human);
-	if(result4)
-	{
-		cout << "You killed the gladiator!" << endl;
-	}
+	if(!result4){return 1;};
+	cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 	player.level_up();
 	player.print_stats();
+	cout << endl;
+	cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+	
+	//Fight 5
+	player.reset_hp();
+	character fight5(3);
+	fight5.inc_str(3);
+	fight5.inc_phys(5);
+	fight5.inc_dex(3);
+	fight5.set_wep(2);
+	cout << " A trained gladiator stands before you" << endl;
+	cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+	int result5 = fight(&player,&fight5);
+	if(!result5){return 1;}
+	cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+	
+	//Fight 6
+	player.reset_hp();
+	character fight6(3);
+	fight6.inc_str(2);
+	fight6.inc_phys(8);
+	fight6.inc_dex(2);
+	fight6.set_wep(2);
+	cout << "A large dwarf warrior stands before you" << endl;
+	cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+	int result6 = fight(&player,&fight6);
+	if(!result6){return 1;}
+	cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+	player.level_up();
+	player.print_stats();
+	cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+	
+	//Fight 7
+	player.reset_hp();
+	character fight7(3);
+	fight7.inc_str(2);
+	fight7.inc_phys(3);
+	fight7.inc_dex(8);
+	fight7.set_wep(3);
+	cout << " An elf armed with a Rapier enters the arena" << endl;
+	cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+	int result7 = fight(&player,&fight7);
+	if(!result7){return 1;}
+	cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+	player.level_up();
+	player.print_stats();
+	cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+	
+	//Boss fight
+	player.reset_hp();
+	character boss1(3);
+	boss1.inc_str(6);
+	boss1.inc_phys(6);
+	boss1.inc_dex(6);
+	boss1.set_wep(4);
+	cout << " A large man in armour enters the arena! This fight seems like it will be tough!" << endl;
+	cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+	int result8 = fight(&player,&boss1);
+	if(!result8){return 1;}
+	cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+	cout << "You've beaten the boss! Thanks for playing!" << endl;
 	
 }
 
@@ -235,7 +290,7 @@ int fight(character *player, character *enemy)
 	cout << "You go second" << endl; 
 	first = 'e';
 	int damage = hit_enemy(enemy->get_str(),enemy->get_dex(),enemy->get_wep(),player->get_ac());
-	if(damage > 0){cout << "Enemy hits for " << damage << " damage" << endl;}
+	if(damage > 0){player->take_damage(damage);cout << "Enemy hits for " << damage << " damage (hp:" << player->get_hp() << ") " << endl;}
 	else cout << "Enemy misses" << endl;
 	}
 	
@@ -250,13 +305,13 @@ int fight(character *player, character *enemy)
 		
 		
 		int damage = hit_enemy(enemy->get_str(),enemy->get_dex(),enemy->get_wep(),player->get_ac());
-		if(damage > 0){cout << "Enemy hits for " << damage << " damage" << endl;player->take_damage(damage);}
+		if(damage > 0){player->take_damage(damage);cout << "Enemy hits for " << damage << " damage (hp:" << player->get_hp() << ") " << endl;}
 		else cout << "Enemy misses" << endl;
 		
 	
 	
-	if(player->get_hp() < 0){return 0;}
-	if(enemy->get_hp() < 0){ return 1;}
+	if(player->get_hp() < 0){cout << " You lost! " << endl;cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); return 0;}
+	if(enemy->get_hp() < 0){cout << "You won! "<< endl;cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); return 1;}
 	}
 }
 

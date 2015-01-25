@@ -15,7 +15,7 @@ cout << "1. Dagger" << endl;
 scanf("%d",&choice);
 return 1;
 }
-else if(level < 6)
+else if(level < 4)
 {
 cout << "1.Dagger, 2. ShortSword, 3.Rapier" << endl;
 scanf("%d",&choice);
@@ -32,7 +32,7 @@ switch(choice)
 		return 1;
 }
 }
-else if(level < 10)
+else if(level < 6)
 {
 cout << "1.Dagger, 2. ShortSword, 3.Rapier, 4.Longsword" << endl;
 scanf("%d",&choice);
@@ -51,7 +51,7 @@ switch(choice)
 		return 1;
 }
 }
-else if(level >= 10)
+else if(level >= 6)
 {
 cout << "1.Dagger, 2. ShortSword, 3.Rapier, 4.Longsword, 5. Great Axe" << endl;
 scanf("%d",&choice);

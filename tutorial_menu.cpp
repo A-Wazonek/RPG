@@ -12,10 +12,10 @@ void tutorial_menu(void)
 	cout << "PHYS affects your health and your AC" << endl;
 	cout << "DEX affects your AC and your hit with Rapiers"<< endl;
 	cout << endl;
-	cout << "When you make your character you get 2 stat boosts, humans get 4. " << endl;
-	cout << "Elves are fast and strong, and have +2 to Dex and Str, but are frail and get -2 to Phys" << endl;
-	cout << "Dwarves are slow but strong and hardy, they get +2 to STR and PHYS but -2 to DEX" << endl;
-	cout << "Humans vary, they get +2 custom stats" << endl;
+	cout << "When you make your character you get 2 stat boosts, humans get 3. " << endl;
+	cout << "Elves are fast and have +2 to DEX and +1 to STR, but are frail and get -2 to PHYS" << endl;
+	cout << "Dwarves are slow but strong and hardy, they get +2 to PHYS and +1 to STR but -2 to DEX" << endl;
+	cout << "Humans vary, they get 2 extra stat boosts" << endl;
 	cout << endl << endl;
 	
 	cout << "Combat works as follows: " << endl;
