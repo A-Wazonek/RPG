@@ -1,0 +1,1 @@
+g++ RPG.cpp hit_enemy.cpp get_weapon.cpp tutorial_menu.cpp -o ARENA_GAME

@@ -25,6 +25,7 @@ public:
 	int get_race(){return race;};
 	int get_level(){return level;};
 	int get_wep(){return weapon;};
+	void set_wep(int wep){weapon = wep;};
 	void inc_str(int newstr){str=str + newstr;};
 	void inc_phys(int newphys){phys=phys + newphys;};
 	void inc_dex(int newdex){dex= dex +newdex;};
@@ -32,6 +33,7 @@ public:
 	void reset_ac(){ac=6 + (phys-10) + (dex-10);};
 	void take_damage(int damage){hp = hp - damage;};
 	void level_up();
+	void print_stats();
 	int check_hit(int hit){return ac - hit;};
 };
 
@@ -64,6 +66,41 @@ int fight(character *player, character *enemy);
 int hit_enemy(int str, int dex, int wep, int enemy_ac);
 int get_weapon(int level);
 void tutorial_menu();
+void character::level_up(){
+level++;
+cout << "You leveled! Upgrade which stat?" << endl;
+		cout << "1->STR: " << get_str() << endl;
+		cout << "2->PHYS: " << get_phys() << endl;
+		cout << "3->DEX: " << get_dex() << endl;
+int new_choice;
+scanf("%d",&new_choice);
+switch(new_choice)
+{
+	case 1: 
+		inc_str(1);
+		break;
+	case 2:
+		inc_phys(1);
+		break;
+	default:
+		inc_dex(1);
+		break;
+}
+cout << endl;
+if(level ==10){cout << "You've unlocked the Great Axe!" << endl;}
+else if( level >= 6){cout << "You've unlocked the Longsword!" << endl;}
+else if(level == 3){cout << "You've unlocked the Short Sword and the Rapier!" << endl;}
+
+}
+
+void character::print_stats(){
+		cout << "Stats: " << endl;
+		cout << "STR: " << this->get_str() << endl;
+		cout << "PHYS: " << this->get_phys() << endl;
+		cout << "DEX: " << this->get_dex() << endl << endl;
+
+
+}
 
 main(){
 	int race_choice;
@@ -87,10 +124,7 @@ main(){
 	{
 		int stat_choice;
 		cout << "You have " << bonus_stats << " points to spend on stats" << endl;
-		cout << "Current Stats: " << endl;
-		cout << "STR: " << player.get_str() << endl;
-		cout << "PHYS: " << player.get_phys() << endl;
-		cout << "DEX: " << player.get_dex() << endl;
+		player.print_stats();
 		cout << "Increase: 1.STR 2.PHYS 3.DEX " << endl;
 		scanf("%d",&stat_choice);
 		switch(stat_choice)
@@ -116,11 +150,8 @@ main(){
 	player.reset_hp();
 	player.reset_ac();
 	
-	cout << endl << endl << endl << endl<<endl<<endl<<endl<<endl;
-	cout << "Current Stats: " << endl;
-	cout << "STR: " << player.get_str() << endl;
-	cout << "PHYS: " << player.get_phys() << endl;
-	cout << "DEX: " << player.get_dex() << endl;
+	cout << endl << endl << endl << endl<<endl<<endl<<endl<<endl << endl << endl << endl << endl << endl << endl;
+	player.print_stats();
 	cout << "HP: " << player.get_hp() << endl;
 	cout << "AC: " << player.get_ac() << endl;
 	
@@ -145,6 +176,7 @@ main(){
 	cout << "You died to a rat!" << endl;
 	return 1;
 	}
+	player.reset_hp();
 	
 	//Fight 2
 	character dog(3);
@@ -156,8 +188,36 @@ main(){
 	cout << "You killed the dog" << endl;
 	}
 	else return 1;
-	cout << "Level up!" << endl;
+	player.level_up();
+	player.reset_hp();
 	
+	//Fight 3
+	character human(3);
+	human.inc_str(2);
+	cout << "An inexperienced Gladiator appears before you, he's armed with a dagger" << endl;
+	cin >> start;
+	int result3 = fight(&player, &human);
+	if(result3)
+	{
+		cout << "You killed the fighter" << endl;
+	}
+	else return 1;
+	player.level_up();
+	player.reset_hp();
+	//Fight 4
+	character large_human(3);
+	large_human.inc_str(2);
+	large_human.inc_phys(2);
+	large_human.inc_dex(2);
+	large_human.set_wep(2);
+	cout << "A somewhat trained gladiator appears before you, he's armed with a short sword!" << endl;
+	int result4 = fight(&player, &large_human);
+	if(result4)
+	{
+		cout << "You killed the gladiator!" << endl;
+	}
+	player.level_up();
+	player.print_stats();
 	
 }
 
@@ -166,15 +226,6 @@ main(){
 int fight(character *player, character *enemy)
 {
 	int won = 0;
-	int difference = player->get_level() - enemy->get_level();
-	if(difference < -1)
-	{
-	cout << "Warning, this battle might prove too difficult! Run away(y/n)? " << endl;
-	char run;
-	scanf("%c",&run);
-	if(run == 'y'){return 2;}
-	}
-	
 	int init_player = (rand() % 10) + (player->get_dex() - 10);
 	int init_enemy = (rand() % 10) + (enemy->get_dex() - 10);
 	char first;
@@ -192,14 +243,10 @@ int fight(character *player, character *enemy)
 	while(won == 0)
 	{
 		cout << "Hit enemy with which weapon? ";
-		//int weapon = get_weapon(player->get_level());
-		cout << "1. Dagger" << endl;
-		int weapon;
-		scanf("%d",&weapon);
-		weapon = 1;
+		int weapon = get_weapon(player->get_level());
 		int damage1 = hit_enemy(player->get_str(),player->get_dex(),weapon,enemy->get_ac());
-		if(damage1 > 0){cout << "You hit the enemy for " << damage1 << " damage " << endl;enemy->take_damage(damage1);}
-		else cout << "missed enemy" << endl;
+		if(damage1 > 0){cout << endl << "You hit the enemy for " << damage1 << " damage " << endl;enemy->take_damage(damage1);}
+		else cout << "Missed enemy" << endl;
 		
 		
 		int damage = hit_enemy(enemy->get_str(),enemy->get_dex(),enemy->get_wep(),player->get_ac());
@@ -208,8 +255,8 @@ int fight(character *player, character *enemy)
 		
 	
 	
-	if(player->get_hp() < 0){ cout << "You died! Better luck next time" << endl; return 0;}
-	if(enemy->get_hp() < 0){cout << "You won! " << endl; won = 1; return 1;}
+	if(player->get_hp() < 0){return 0;}
+	if(enemy->get_hp() < 0){ return 1;}
 	}
 }
 
