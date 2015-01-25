@@ -173,7 +173,7 @@ main(){
 	cout << "A rat appears before you, it looks feral" << endl;
 	cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 	int result = fight(&player, &rat);
-	if(!result){return 1;};
+	if(!result){cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');return 1;};
 	player.reset_hp();
 	cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 	
@@ -183,7 +183,7 @@ main(){
 	cout << "A feral dog is tossed into the arena, prepare to fight!" << endl;
 	cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 	int result2 = fight(&player, &dog);
-	if(!result2){return 1;};
+	if(!result2){cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');return 1;};
 	player.level_up();
 	player.reset_hp();
 	cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
@@ -194,7 +194,7 @@ main(){
 	cout << "An inexperienced Gladiator appears before you, he's armed with a dagger" << endl;
 	cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 	int result3 = fight(&player, &human);
-	if(!result3){return 1;};
+	if(!result3){cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');return 1;};
 	player.level_up();
 	player.reset_hp();	
 	cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
@@ -208,7 +208,7 @@ main(){
 	cout << "A somewhat trained gladiator appears before you, he's armed with a short sword!" << endl;
 	cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 	int result4 = fight(&player, &large_human);
-	if(!result4){return 1;};
+	if(!result4){cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');return 1;};
 	cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 	player.level_up();
 	player.print_stats();
@@ -225,7 +225,7 @@ main(){
 	cout << "A trained gladiator stands before you, armed with a shortsword and a shield" << endl;
 	cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 	int result5 = fight(&player,&fight5);
-	if(!result5){return 1;}
+	if(!result5){cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');return 1;}
 	cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 	
 	//Fight 6
@@ -238,7 +238,7 @@ main(){
 	cout << "A large dwarf warrior stands before you, he's holding a hammer" << endl;
 	cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 	int result6 = fight(&player,&fight6);
-	if(!result6){return 1;}
+	if(!result6){cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');return 1;}
 	cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 	player.level_up();
 	player.print_stats();
@@ -254,7 +254,7 @@ main(){
 	cout << "An elf armed with a Rapier enters the arena" << endl;
 	cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 	int result7 = fight(&player,&fight7);
-	if(!result7){return 1;}
+	if(!result7){cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');return 1;}
 	cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 	player.level_up();
 	player.print_stats();
@@ -270,7 +270,7 @@ main(){
 	cout << "A large man in armour enters the arena! This fight seems like it will be tough!" << endl;
 	cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 	int result8 = fight(&player,&boss1);
-	if(!result8){return 1;}
+	if(!result8){cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');return 1;}
 	cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 	cout << "You've beaten the boss! Thanks for playing!" << endl;
 	cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
