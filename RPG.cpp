@@ -38,7 +38,7 @@ public:
 	int check_hit(int hit){return ac - hit;};
 };
 
-character::character(int rc){
+character::character(int rc){ //The constructor, race 1 = dwarf, race 2 = elf
 	race = rc;
 	if(rc == 1) 
 	{
@@ -68,7 +68,8 @@ int fight(character *player, character *enemy);
 int hit_enemy(int str, int dex, int wep, int enemy_ac);
 int get_weapon(int level);
 void tutorial_menu();
-void character::level_up(){
+
+void character::level_up(){ //Levels up the character, increases one stat and may unlock weapons depending on the level. 
 level++;
 cout << "You leveled! Upgrade which stat?" << endl;
 		cout << "1->STR: " << get_str() << endl;
@@ -92,7 +93,6 @@ cout << endl;
 if(level ==6){cout << "You've unlocked the Great Axe!" << endl;}
 else if( level == 4){cout << "You've unlocked the Longsword!" << endl;}
 else if(level == 2){cout << "You've unlocked the Short Sword and the Rapier!" << endl;}
-
 }
 
 
