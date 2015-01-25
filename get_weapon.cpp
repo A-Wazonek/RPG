@@ -5,6 +5,7 @@
 #include<cstdio>
 using namespace std;
 
+//takes the players level and lets them choose what weapon to use based on their level
 int get_weapon(int level)
 {
 int weapon = 1;

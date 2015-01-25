@@ -5,6 +5,7 @@
 #include<cstdio>
 using namespace std;
 
+//Rolls 2 dice based on what the weapon is, and compares it the enemy AC to see if its a hit. 
 int hit_enemy(int str, int dex, int wep, int enemy_ac)
 {
 	int roll;
